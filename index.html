@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Assessment</title>
+    <style>
+        body, h1, h2, p, input, select, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #003366;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #ffd700;
+        }
+        header {
+            background-color: #003366;
+            color: #ffd700;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+            gap: 2rem;
+        }
+        section {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        section h2 {
+            margin-bottom: 1.5rem;
+            color: #00509e;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #ffd700;
+            color: #003366;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #003366;
+            color: #ffd700;
+        }
+        p {
+            margin-top: 1rem;
+            font-weight: bold;
+           
+        }
+        footer p{
+            background-color: #003366;
+            color: #ffd700;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+                flex-direction: column;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            input, select, button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JavaScript Assessment</h1>
+    </header>
+    <main>
+        <!-- Task 1: Simple Calculator -->
+        <section id="calculator">
+            <h2>Task 1: Simple Calculator</h2>
+            <input type="number" id="num1" placeholder="First Number">
+            <input type="number" id="num2" placeholder="Second Number">
+            <select id="operator">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <button onclick="calculate()">Calculate</button>
+            <p id="result"></p>
+        </section>
+        <!-- Task 2: Array Operations -->
+        <section id="array-operations">
+            <h2>Task 2: Array Operations</h2>
+            <input type="text" id="arrayInput" placeholder="Enter numbers separated by commas">
+            <button onclick="sumEvenNumbers()">Calculate Sum</button>
+            <p id="sumResult"></p>
+        </section>
+        <!-- Task 3: Object Manipulation -->
+        <section id="object-manipulation">
+            <h2>Task 3: Object Manipulation</h2>
+            <p>First Name: <span id="firstName">Pothuri</span></p>
+            <p>Last Name: <span id="lastName">Yaswanth Krishna Kumar</span></p>
+            <p>Age: <span id="age">19</span></p>
+            <button onclick="GetFullName()">Display Full Name</button>
+            <button onclick="incrementAge()">Increment Age</button>
+            <p id="personResult"></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Yaswanth Pothuri</p>
+    </footer>
+    <script>
+        // Task 1: Simple Calculator
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const operator = document.getElementById('operator').value;
+            let result;
+            if (isNaN(num1) || isNaN(num2)) {
+                result = "Please enter valid numbers.";
+            } else {
+                switch (operator) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero";
+                        break;
+                    default:
+                        result = "Invalid operator";
+                }
+            }
+            document.getElementById('result').innerText = `Result: ${result}`;
+        }
+        // Task 2: Array Operations
+        function sumEvenNumbers() {
+            const arrayInput = document.getElementById('arrayInput').value;
+            const arr = arrayInput.split(',').map(Number);
+            let sum = 0;
+
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] % 2 === 0) {
+                    sum += arr[i];
+                }
+            }
+
+            document.getElementById('sumResult').innerText = `Sum of even numbers: ${sum}`;
+        }
+        // Task 3: Object Manipulation
+        const Person = {
+            firstName: "Pothuri",
+            lastName: "Yaswanth Krishna Kumar",
+            age: 19,
+            getfullname: function () {
+                return `${this.firstName} ${this.lastName}`;
+            },
+            incrementAge: function () {
+                this.age += 1;
+                document.getElementById('age').innerText = this.age;
+            }
+        };
+        function GetFullName() {
+            document.getElementById('personResult').innerText = `Full Name: ${Person.getfullname()}`;
+        }
+        function incrementAge() {
+            Person.incrementAge();
+        }
+    </script>
+</body>
+</html>
